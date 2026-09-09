@@ -8,6 +8,8 @@ exports/
 demo_notebooks/
 assets/
 .remove
+plots/
+jacobs_models/
 
 # demo run
 .vscode/
