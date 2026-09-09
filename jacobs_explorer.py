@@ -3,7 +3,7 @@ python explore_cebra.py --quick          # ~1-2 min, sanity check
 python explore_cebra.py                  # full run, ~10-20 min on CPU
 python explore_cebra.py --device mps
 
-Otherwise, setup in the
+Otherwise, setup is manually specified in the code.
 
 """
 
@@ -26,7 +26,10 @@ from cebra import CEBRA
 
 # ===========================================================================
 # Part 1: My own code version of https://cebra.ai/docs/demo_notebooks/Demo_Allen.html, except the evaluation part.
+
 # (Could still use some cleanup and functionality)
+
+# To run the Allen code, data must be manually downloaded from https://figshare.com/s/60adb075234c2cc51fa3 and put in the ./data folder
 
 # ===========================================================================
 
