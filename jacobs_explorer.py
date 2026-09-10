@@ -5,6 +5,9 @@ python explore_cebra.py --device mps
 
 Otherwise, setup is manually specified in the code.
 
+To run the Allen code, data must be manually downloaded from https://figshare.com/s/60adb075234c2cc51fa3 and put in the ./data folder
+
+
 """
 
 from __future__ import annotations
@@ -13,7 +16,7 @@ import argparse
 import itertools
 import pickle
 import time
-from os import mkdir
+from os import makedirs
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -28,8 +31,6 @@ from cebra import CEBRA
 # Part 1: My own code version of https://cebra.ai/docs/demo_notebooks/Demo_Allen.html, except the evaluation part.
 
 # (Could still use some cleanup and functionality)
-
-# To run the Allen code, data must be manually downloaded from https://figshare.com/s/60adb075234c2cc51fa3 and put in the ./data folder
 
 # ===========================================================================
 
@@ -59,8 +60,8 @@ def allen_demo(args):
 
     train_embeddings, test_embeddings = {}, {}
 
-    mkdir("plots", exist_ok=True)
-    mkdir("jacobs_models", exist_ok=True)
+    makedirs("plots", exist_ok=True)
+    makedirs("jacobs_models", exist_ok=True)
 
     ca_train_set, ca_test_set, train_embeddings["ca"], test_embeddings["ca_test"] = create_train_test("ca", model_conf, cortex, num_neurons, seed)
     np_train_set, np_test_set, train_embeddings["np"], test_embeddings["np_test"] = create_train_test("np", model_conf, cortex, num_neurons, seed)
@@ -139,8 +140,9 @@ def create_train_test(name, model_conf, cortex="VISp", num_neurons=800, seed=333
 
     try:
         model = pickle.load(open(mod_name, "rb")).to(model_conf["device"])
+        train_set.configure_for(model)
 
-    except:
+    except FileNotFoundError:
         if is_multi:
             data_loader = cebra.data.ContinuousMultiSessionDataLoader(
                 train_set,
