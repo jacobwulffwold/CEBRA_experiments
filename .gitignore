@@ -9,7 +9,9 @@ demo_notebooks/
 assets/
 .remove
 plots/
-jacobs_models/
+jacobs_models/movie_ca_offset1-model_500
+jacobs_models/movie_np_offset1-model_500
+jacobs_models/movie_joint_['offset1-model', 'offset1-model']_500
 
 # demo run
 .vscode/
